@@ -84,7 +84,7 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	/**
 	 * Create a new AnnotationConfigApplicationContext, deriving bean definitions
 	 * from the given component classes and automatically refreshing the context.
-	 * @param componentClasses one or more component classes &mdash; for example,
+	 * @param componentClasses one or more component classes &mdash; for example, 配置类
 	 * {@link Configuration @Configuration} classes
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... componentClasses) {
