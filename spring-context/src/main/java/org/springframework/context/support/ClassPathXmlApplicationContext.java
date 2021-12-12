@@ -48,6 +48,8 @@ import org.springframework.util.Assert;
  * @see #getResource
  * @see #getResourceByPath
  * @see GenericApplicationContext
+ *
+ * xml配置相关信息
  */
 public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContext {
 

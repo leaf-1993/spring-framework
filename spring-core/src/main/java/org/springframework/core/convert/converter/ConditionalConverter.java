@@ -39,6 +39,7 @@ import org.springframework.core.convert.TypeDescriptor;
  * @see GenericConverter
  * @see ConverterFactory
  * @see ConditionalGenericConverter
+ * 条件转换器
  */
 public interface ConditionalConverter {
 

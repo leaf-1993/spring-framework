@@ -507,20 +507,24 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 
 	@Override
 	public void merge(ConfigurableEnvironment parent) {
+		// 添加新的属性来源
 		for (PropertySource<?> ps : parent.getPropertySources()) {
 			if (!this.propertySources.contains(ps.getName())) {
 				this.propertySources.addLast(ps);
 			}
 		}
+		// 添加新的激活的属性
 		String[] parentActiveProfiles = parent.getActiveProfiles();
 		if (!ObjectUtils.isEmpty(parentActiveProfiles)) {
 			synchronized (this.activeProfiles) {
 				Collections.addAll(this.activeProfiles, parentActiveProfiles);
 			}
 		}
+		// 添加新的默认属性
 		String[] parentDefaultProfiles = parent.getDefaultProfiles();
 		if (!ObjectUtils.isEmpty(parentDefaultProfiles)) {
 			synchronized (this.defaultProfiles) {
+				// todo 为什么要移除， 应为初始化的时候就有一个default，所以如果父容器也有就把原来的移除调就可以
 				this.defaultProfiles.remove(RESERVED_DEFAULT_PROFILE_NAME);
 				Collections.addAll(this.defaultProfiles, parentDefaultProfiles);
 			}

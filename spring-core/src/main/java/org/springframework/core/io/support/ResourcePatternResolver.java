@@ -52,6 +52,7 @@ import org.springframework.core.io.ResourceLoader;
  * @see org.springframework.core.io.ResourceLoader
  * @see org.springframework.context.ApplicationContext
  * @see org.springframework.context.ResourceLoaderAware
+ * 正则资源路径解析器
  */
 public interface ResourcePatternResolver extends ResourceLoader {
 

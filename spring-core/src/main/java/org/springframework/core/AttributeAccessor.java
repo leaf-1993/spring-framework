@@ -28,6 +28,7 @@ import org.springframework.util.Assert;
  * @author Rob Harrop
  * @author Sam Brannen
  * @since 2.0
+ * 属性访问器
  */
 public interface AttributeAccessor {
 

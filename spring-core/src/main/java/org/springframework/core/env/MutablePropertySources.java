@@ -38,6 +38,7 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @since 3.1
  * @see PropertySourcesPropertyResolver
+ * 可变的环境变量来源
  */
 public class MutablePropertySources implements PropertySources {
 

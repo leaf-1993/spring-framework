@@ -64,13 +64,21 @@ import org.springframework.lang.Nullable;
  */
 public abstract class AbstractRefreshableApplicationContext extends AbstractApplicationContext {
 
+	/**
+	 * 允许bean定义重写
+	 */
 	@Nullable
 	private Boolean allowBeanDefinitionOverriding;
 
+	/**
+	 * 允许循环引用
+	 */
 	@Nullable
 	private Boolean allowCircularReferences;
 
-	/** Bean factory for this context. */
+	/** Bean factory for this context.
+	 * 默认的BeanFactory实现类
+	 * */
 	@Nullable
 	private volatile DefaultListableBeanFactory beanFactory;
 

@@ -27,6 +27,7 @@ import org.springframework.lang.Nullable;
  *
  * @author Chris Beams
  * @since 3.1
+ * 可配置的属性解析器
  */
 public interface ConfigurablePropertyResolver extends PropertyResolver {
 
@@ -41,6 +42,7 @@ public interface ConfigurablePropertyResolver extends PropertyResolver {
 	 * </pre>
 	 * @see PropertyResolver#getProperty(String, Class)
 	 * @see org.springframework.core.convert.converter.ConverterRegistry#addConverter
+	 * 获取转换服务
 	 */
 	ConfigurableConversionService getConversionService();
 
@@ -90,6 +92,7 @@ public interface ConfigurablePropertyResolver extends PropertyResolver {
 	/**
 	 * Specify which properties must be present, to be verified by
 	 * {@link #validateRequiredProperties()}.
+	 * 设置必填属性
 	 */
 	void setRequiredProperties(String... requiredProperties);
 

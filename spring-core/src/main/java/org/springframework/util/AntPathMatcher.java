@@ -34,9 +34,9 @@ import org.springframework.lang.Nullable;
  *
  * <p>The mapping matches URLs using the following rules:<br>
  * <ul>
- * <li>{@code ?} matches one character</li>
- * <li>{@code *} matches zero or more characters</li>
- * <li>{@code **} matches zero or more <em>directories</em> in a path</li>
+ * <li>{@code ?} matches one character</li> 匹配任一单字符
+ * <li>{@code *} matches zero or more characters</li> 匹配0或多个字符
+ * <li>{@code **} matches zero or more <em>directories</em> in a path</li> 匹配0或多个目录
  * <li>{@code {spring:[a-z]+}} matches the regexp {@code [a-z]+} as a path variable named "spring"</li>
  * </ul>
  *
@@ -78,24 +78,54 @@ public class AntPathMatcher implements PathMatcher {
 
 	private static final int CACHE_TURNOFF_THRESHOLD = 65536;
 
+	/**
+	 * ^已什么开始 ^/ 已 / 开始
+	 *
+	 * 变量正则
+	 */
 	private static final Pattern VARIABLE_PATTERN = Pattern.compile("\\{[^/]+?}");
 
+	/**
+	 * 通配符
+	 */
 	private static final char[] WILDCARD_CHARS = {'*', '?', '{'};
 
 
+	/**
+	 * 路径分割串
+	 */
 	private String pathSeparator;
 
+	/**
+	 * 路径分隔模式换成
+	 */
 	private PathSeparatorPatternCache pathSeparatorPatternCache;
 
+	/**
+	 * 大小写敏感 默认true
+	 */
 	private boolean caseSensitive = true;
 
+	/**
+	 * todo
+	 * 删除标记
+	 */
 	private boolean trimTokens = false;
 
+	/**
+	 * 是否换成匹配模式
+	 */
 	@Nullable
 	private volatile Boolean cachePatterns;
 
+	/**
+	 * 标记模式换成
+	 */
 	private final Map<String, String[]> tokenizedPatternCache = new ConcurrentHashMap<>(256);
 
+	/**
+	 * 字符串匹配器缓存
+	 */
 	final Map<String, AntPathStringMatcher> stringMatcherCache = new ConcurrentHashMap<>(256);
 
 
@@ -168,11 +198,16 @@ public class AntPathMatcher implements PathMatcher {
 	}
 
 
+	/** 是否是正则匹配路径  * ? {} 则是
+	 * @param path the path to check
+	 * @return
+	 */
 	@Override
 	public boolean isPattern(@Nullable String path) {
 		if (path == null) {
 			return false;
 		}
+		// 是否路径var
 		boolean uriVar = false;
 		for (int i = 0; i < path.length(); i++) {
 			char c = path.charAt(i);
@@ -207,6 +242,9 @@ public class AntPathMatcher implements PathMatcher {
 	 * @param fullMatch whether a full pattern match is required (else a pattern match
 	 * as far as the given base path goes is sufficient)
 	 * @return {@code true} if the supplied {@code path} matched, {@code false} if it didn't
+	 *
+	 * path是否符合pattern
+	 * fullMatch
 	 */
 	protected boolean doMatch(String pattern, @Nullable String path, boolean fullMatch,
 			@Nullable Map<String, String> uriTemplateVariables) {
@@ -941,8 +979,14 @@ public class AntPathMatcher implements PathMatcher {
 	 */
 	private static class PathSeparatorPatternCache {
 
+		/**
+		 * 结束通配符
+		 */
 		private final String endsOnWildCard;
 
+		/**
+		 * 结束双通配符
+		 */
 		private final String endsOnDoubleWildCard;
 
 		public PathSeparatorPatternCache(String pathSeparator) {

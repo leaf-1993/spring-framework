@@ -30,6 +30,11 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @since 07.07.2003
  * @see org.springframework.beans.factory.config.ConfigurableBeanFactory#setParentBeanFactory
+ *
+ * 层次结构BeanFactory
+ * 获取父容器，已经判断当前容器是否包含某个bean
+ *
+ * 父子容器相关
  */
 public interface HierarchicalBeanFactory extends BeanFactory {
 

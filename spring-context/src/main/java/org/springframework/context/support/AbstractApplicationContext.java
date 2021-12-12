@@ -194,13 +194,19 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	/** BeanFactoryPostProcessors to apply on refresh. */
 	private final List<BeanFactoryPostProcessor> beanFactoryPostProcessors = new ArrayList<>();
 
-	/** System time in milliseconds when this context started. */
+	/** System time in milliseconds when this context started.
+	 * 容器启动开始时间
+	 * */
 	private long startupDate;
 
-	/** Flag that indicates whether this context is currently active. */
+	/** Flag that indicates whether this context is currently active.*
+	 * 当前容器是否激活
+	 */
 	private final AtomicBoolean active = new AtomicBoolean();
 
-	/** Flag that indicates whether this context has been closed already. */
+	/** Flag that indicates whether this context has been closed already.
+	 * 当前容器是否关闭
+	 * */
 	private final AtomicBoolean closed = new AtomicBoolean();
 
 	/** Synchronization monitor for the "refresh" and "destroy". */
@@ -210,7 +216,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	@Nullable
 	private Thread shutdownHook;
 
-	/** ResourcePatternResolver used by this context. */
+	/** ResourcePatternResolver used by this context.
+	 * 正则资源解析器
+	 * */
 	private ResourcePatternResolver resourcePatternResolver;
 
 	/** LifecycleProcessor for managing the lifecycle of beans within this context. */
@@ -252,7 +260,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @param parent the parent context
 	 */
 	public AbstractApplicationContext(@Nullable ApplicationContext parent) {
+		// 设置资源路径解析器PathMatchingResourcePatternResolver
 		this();
+		// 设置父容器，如果父容器存在且父容器的Environment是ConfigurableEnvironment，则将两个容器的Environment进行合并
 		setParent(parent);
 	}
 
@@ -614,6 +624,10 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	/**
 	 * Prepare this context for refreshing, setting its startup date and
 	 * active flag as well as performing any initialization of property sources.
+	 * 容器刷新的前置条件
+	 * 1、设置启动时间
+	 * 2、设置激活标志
+	 * 3、设置属性资源
 	 */
 	protected void prepareRefresh() {
 		// Switch to active.
@@ -631,6 +645,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		}
 
 		// Initialize any placeholder property sources in the context environment.
+		// 初始化所有占位符属性来源
 		initPropertySources();
 
 		// Validate that all properties marked as required are resolvable:
